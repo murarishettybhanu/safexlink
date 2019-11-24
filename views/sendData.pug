@@ -1,0 +1,30 @@
+extends ./layout
+block content
+  form#avanthgarde_payment_form.form-horizontal(action='https://www.avantgardepayments.com/agcore/payment', method='POST')
+    input.form-control(type='hidden', name='me_id', value=me_id)
+    input.form-control(type='hidden', name='txn_details', value=txn_details)
+    input.form-control(type='hidden', name='pg_details', value=pg_details)
+    input.form-control(type='hidden', name='card_details', value=card_details)
+    input.form-control(type='hidden', name='cust_details', value=cust_details)
+    input.form-control(type='hidden', name='bill_details', value=bill_details)
+    input.form-control(type='hidden', name='ship_details', value=ship_details)
+    input.form-control(type='hidden', name='item_details', value=item_details)
+    input.form-control(type='hidden', name='other_details', value=other_details)
+    .container.cs-border-light-blue
+      // first line
+      .row.pad-top
+        // end first line
+        .equalheight.row(style='padding-top: 10px;')
+          #cs-main-body.cs-text-size-default.pad-bottom
+            .col-sm-9.equalheight-col.pad-top
+              div(style='padding-bottom: 50px;')
+                h1 Initiating your payment process
+                .row
+                  .col-sm-12
+                    legend Your payment is being processed, Please wait for a moment.
+
+  script(type='text/javascript').
+      $(document).ready(function (e) {
+          $("#avanthgarde_payment_form").submit();
+      });
+

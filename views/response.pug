@@ -1,0 +1,94 @@
+extends layout.pug
+block moreStyle
+ style.
+    .has-success .form-control, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {
+    color: #1cb78c !important;
+    }
+    .has-success .help-block {
+    color: #1cb78c !important;
+    border-color: #1cb78c !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #1cb78c;
+    }
+    .has-error .form-control, .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+    color: #f0334d;
+    border-color: #f0334d;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #f0334d;
+    }
+    table {
+    color: #333; /* Lighten up font color */
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    width: 640px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+    td, th {
+    border: 1px solid #CCC;
+    height: 30px;
+    } /* Make cells a bit taller */
+    th {
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure theyre bold */
+    font-color: #1cb78c !important;
+    }
+    td {
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: left;
+    padding: 2px;/* Center our text */
+    }
+    label {
+    font-weight: normal;
+    display: block;
+    }
+
+block content
+  .container.cs-border-light-blue
+    // first line
+    .row.pad-top
+      // end first line
+      .equalheight.row(style='padding-top: 10px;')
+        #cs-main-body.cs-text-size-default.pad-bottom
+          .col-sm-9.equalheight-col.pad-top
+            div(style='padding-bottom: 50px;')
+              h1 Thank you!
+              .row
+                .col-sm-12                  
+                    | Your payment is #{txn_response.res_message} Here is the details for it
+                .row
+                  .col-sm-6
+                    .form-group
+                      label.control-label.col-sm-4 Order Number
+                      .col-sm-8
+                         = txn_response.order_no
+                  .col-sm-6
+                    .form-group
+                      label.control-label.col-sm-4 Amount
+                      .col-sm-8
+                         = txn_response.amount
+                  .row
+                    .col-sm-6
+                      .form-group
+                        label.control-label.col-sm-4 Transaction AG REF
+                        .col-sm-8
+                          = txn_response.ag_ref
+                    .col-sm-6
+                      .form-group
+                        label.control-label.col-sm-4 Transaction PG REF
+                        .col-sm-8
+                          = txn_response.pg_ref
+                  .row
+                    .col-sm-6
+                      .form-group
+                        label.control-label.col-sm-4 Transaction Status
+                        .col-sm-8
+                          = txn_response.status
+                    .col-sm-6
+                      .form-group
+                        label.control-label.col-sm-4 Transaction Date and Time
+                        .col-sm-8
+                          #{txn_response.txn_date} #{txn_response.txn_time}
+                          .row
+                    .col-sm-12
+                      .form-group
+                        .col-sm-10.col-sm-offset-2
+                          a(href="http://34.93.127.242:3001/").btn.btn-primary.btn-lg(style='display: inline-block; vertical-align: middle; vert-align: middle; float: none;') New Transaction

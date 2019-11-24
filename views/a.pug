@@ -1,0 +1,330 @@
+extends layout.pug
+block content
+  form.form-horizontal(action='/sendData', method='post')
+    // <form id="merchant" name="merchant" method="POST" action="http://localhost:8080/agcore/pg/v1/merchants/">
+    input#msg(type='hidden', name='msg')
+    .container.cs-border-light-blue
+      // first line
+      .row.pad-top
+      // end first line
+      .equalheight.row(style='padding-top: 10px;')
+        #cs-main-body.cs-text-size-default.pad-bottom
+          .col-sm-9.equalheight-col.pad-top
+            div(style='padding-bottom: 50px;')
+              h1 Merchant Accounts
+              .row
+                .col-sm-12
+                  legend Transaction Details    
+                  .row
+                    .col-sm-6
+                      .form-group
+                        //- label.control-label.col-sm-4 Merchant ID
+                        .col-sm-8
+                          // Testing
+                          // input#merchant_id.form-control(type='text', name='merchant_id', value='201710270001')
+                          // Production
+                          <input type="hidden" class="form-control" name="merchant_id" id="merchant_id" value="201911180002" />
+                    .row
+                      .col-sm-6
+                        .form-group
+                          //- label.control-label.col-sm-4 Merchant Key
+                          .col-sm-8
+                            // Testing
+                            // input#merchant_key.form-control(type='text', name='merchant_key', value='oqUl4D0LqA4plZw4reAX/K3UKJoQdet0k/N6X6K4Y5k=')
+                            // Production
+                            <input type="hidden" class="form-control" name="merchant_key" id="merchant_key" value="FgmDFWEm7kJLgOrNCVE0Ee1BSoyF5yILHHFvSjRdg+c=" />
+                      .row
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Order Number
+                            .col-sm-8
+                              input#order_no.form-control(type='hidden', name='order_no', value='12345')
+                        .col-sm-6
+                          .form-group
+                            label.control-label.col-sm-4 Amount
+                            .col-sm-8
+                              input#amount.form-control(type='text', required name='amount', value='')
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Country
+                            .col-sm-8
+                            input#amount.form-control(type='hidden', required name='country', value='IND')
+                              //- select#country.form-control(name='country',value='IND')
+                              //-   option(value='IND') India
+                              //-   option(value='USA') USA
+                              //-   option(value='UK') UK
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Country Currency
+                            .col-sm-8
+                              input#amount.form-control(type='hidden', required name='currency', value='INR')
+                        //-      select#currency.form-control(name='currency')
+                        //-         option(value='INR') Indian Rupee
+                        //-         option(value='USD') US Dollar
+                        //-         option(value='GBR') British Pound
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Transaction Type
+                            .col-sm-8
+                              input#txn_type.form-control(type='hidden', name='txn_type', value='SALE')
+                          //- | Index
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Success URL
+                            .col-sm-8
+                              input.form-control(type='hidden', name='success_url', id='', value='http://localhost:3001/response')
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Failure URL
+                            .col-sm-8
+                              input#failure_url.form-control(type='hidden', name='failure_url', value='http://localhost:3001/response')
+                        .col-sm-6
+                          .form-group
+                            //- label.control-label.col-sm-4 Channel
+                            .col-sm-8
+                              input#channel.form-control(type='hidden', name='channel', value='WEB')
+                    //- .col-sm-12
+                    //-   legend Payment Gateway Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Payment Gateway ID
+                    //-         .col-sm-8
+                    //-           input#pg_id.form-control(type='text', name='pg_id', value='')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Paymode
+                    //-         .col-sm-8
+                    //-           select#paymode.form-control(name='paymode')
+                    //-             option(value='') Select Paymode
+                    //-             option(value='NB') Net Banking
+                    //-             option(value='CC') Credit Card
+                    //-             option(value='DB') Debit Card
+                    //-             option(value='PP') Prepaid Card
+                    //-             option(value='WA') Wallet
+                    //-             option(value='CE') Credit Card EMI
+                      //- .row
+                      //-   .col-sm-6
+                      //-     .form-group
+                      //-       label.control-label.col-sm-4 Scheme
+                      //-       .col-sm-8
+                      //-         input#scheme.form-control(type='text', name='scheme', value='')
+                      //-   .col-sm-6
+                      //-     .form-group
+                      //-       label.control-label.col-sm-4 Emi months
+                      //-       .col-sm-8
+                      //-         input#emi_months.form-control(type='text', name='emi_months', value='')
+                    //- .col-sm-12
+                    //-   legend Card Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Card No
+                    //-         .col-sm-8
+                    //-           input#card_no.form-control(type='text', name='card_no')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Expiry Month
+                    //-         .col-sm-8
+                    //-           select#exp_month.form-control(name='exp_month')
+                    //-             option(value='', selected='') Select Month
+                    //-             option(value='01') 1
+                    //-             option(value='02') 2
+                    //-             option(value='03') 3
+                    //-             option(value='04') 4
+                    //-             option(value='05') 5
+                    //-             option(value='06') 6
+                    //-             option(value='07') 7
+                    //-             option(value='08') 8
+                    //-             option(value='09') 9
+                    //-             option(value='10') 10
+                    //-             option(value='11') 11
+                    //-             option(value='12') 12
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Expiry Year
+                    //-         .col-sm-8
+                    //-           select#exp_year.form-control(name='exp_year')
+                    //-             option(value='') Select Year
+                    //-             option(value='2016') 2016
+                    //-             option(value='2017') 2017
+                    //-             option(value='2018') 2018
+                    //-             option(value='2019') 2019
+                    //-             option(value='2020') 2020
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 CVV2
+                    //-         .col-sm-8
+                    //-           input#cvv2.form-control(type='text', name='cvv2', value='')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Card name
+                    //-         .col-sm-8
+                    //-           input#card_name.form-control(type='text', name='card_name', value='')
+                    .col-sm-12
+                      legend Customer Details
+                      .row
+                        .col-sm-6
+                          .form-group
+                            label.control-label.col-sm-4 Customer Name
+                            .col-sm-8
+                              input#cust_name.form-control(type='text', required name='cust_name')
+                        .col-sm-6
+                          .form-group
+                            label.control-label.col-sm-4 Email ID
+                            .col-sm-8
+                              input#email_id.form-control(type='text', required  name='email_id')
+                      .row
+                        .col-sm-6
+                          .form-group
+                            label.control-label.col-sm-4 Mobile No
+                            .col-sm-8
+                              input#mobile_no.form-control(type='text', required name='mobile_no')
+                        .col-sm-6
+                          .form-group
+                            label.control-label.col-sm-4 Unique Id
+                            .col-sm-8
+                              input#unique_id.form-control(type='text' disabled ,value = "absGiftCards" name='unique_id')
+                      //- .row
+                      //-   .col-sm-6
+                      //-     .form-group
+                      //-       label.control-label.col-sm-4 if user is logged
+                      //-       .col-sm-8
+                      //-         select#is_logged_in.form-control(name='is_logged_in')
+                      //-           option(value='Y') Yes
+                      //-           option(value='N') No
+                    //- .col-sm-12
+                    //-   legend Billing Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Bill Address
+                    //-         .col-sm-8
+                    //-           input#bill_address.form-control(type='text', name='bill_address')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Bill City
+                    //-         .col-sm-8
+                    //-           input#bill_city.form-control(type='text', name='bill_city')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Bill State
+                    //-         .col-sm-8
+                    //-           input#bill_state.form-control(type='text', name='bill_state')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Bill Country
+                    //-         .col-sm-8
+                    //-           input#bill_country.form-control(type='text', name='bill_country')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Bill Zip
+                    //-         .col-sm-8
+                    //-           input#bill_zip.form-control(type='text', name='bill_zip')
+                    //- .col-sm-12
+                    //-   legend Shipping Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship Address
+                    //-         .col-sm-8
+                    //-           input#ship_address.form-control(type='text', name='ship_address')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship City
+                    //-         .col-sm-8
+                    //-           input#ship_city.form-control(type='text', name='ship_city')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship State
+                    //-         .col-sm-8
+                    //-           input#ship_state.form-control(type='text', name='ship_state')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship Country
+                    //-         .col-sm-8
+                    //-           input#ship_country.form-control(type='text', name='ship_country')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship Zip
+                    //-         .col-sm-8
+                    //-           input#ship_zip.form-control(type='text', name='ship_zip')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Ship Days
+                    //-         .col-sm-8
+                    //-           input#ship_days.form-control(type='text', name='ship_days')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Address Count
+                    //-         .col-sm-8
+                    //-           input#address_count.form-control(type='text', name='address_count')
+                    //- .col-sm-12
+                    //-   legend Item Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Item Count
+                    //-         .col-sm-8
+                    //-           input#item_count.form-control(type='text', name='item_count')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Item Value
+                    //-         .col-sm-8
+                    //-           input#item_value.form-control(type='text', name='item_value')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 Item Category
+                    //-         .col-sm-8
+                    //-           input#item_category.form-control(type='text', name='item_category')
+                    //- .col-sm-12
+                    //-   legend Other Details
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 UDF 1
+                    //-         .col-sm-8
+                    //-           input#udf_1.form-control(type='text', name='udf_1')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 UDF 2
+                    //-         .col-sm-8
+                    //-           input#udf_2.form-control(type='text', name='udf_2')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 UDF 3
+                    //-         .col-sm-8
+                    //-           input#udf_3.form-control(type='text', name='udf_3')
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 UDF 4
+                    //-         .col-sm-8
+                    //-           input#udf_4.form-control(type='text', name='udf_4')
+                    //-   .row
+                    //-     .col-sm-6
+                    //-       .form-group
+                    //-         label.control-label.col-sm-4 UDF 5
+                    //-         .col-sm-8
+                    //-           input#udf_5.form-control(type='text', name='udf_5')
+                  .row
+                    .col-sm-12
+                      .form-group
+                        .col-sm-10.col-sm-offset-2
+                          button.btn.btn-primary.btn-lg(style='display: inline-block; vertical-align: middle; vert-align: middle; float: none;') Checkout
+  script(type='text/javascript').
+    $(document).ready(function(e) {
+      $("#order_no").val(Math.floor((Math.random() * 100000) + 1))
+    });
+  //- script(type='text/javascript').
+  //-   $(document).ready(function(e) {
+  //-     $("#amount").val(Math.floor((Math.random() * 100) + 1))
+  //-   });
